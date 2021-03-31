@@ -86,16 +86,17 @@ html {
 
 .weather-header-wrapper {
   max-width: 1440px;
-  margin: 60px auto 60px;
+  margin: 80px auto 40px;
   padding: 0 45px;
   display: flex;
   align-items: center;
 }
 
 .weather-header {
-  margin: 0 60px 0 0px;
+  margin: 0 80px 0 0px;
   display: inline;
   font-weight: 300;
+  font-size: 2rem;
   &.error {
     padding: 15px 20px;
     border-radius: 4px;
