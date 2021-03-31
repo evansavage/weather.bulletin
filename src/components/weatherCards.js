@@ -22,10 +22,8 @@ export default function WeatherCards ({weatherData, zipCode}) {
   const previousTZ = usePrevious(tz);
 
   useEffect (() => {
-    if (previousTZ !== tz) {
-      setTime(moment.tz(moment(), tz).format('h:mm A'));
-
-    }
+    
+    setTime(moment.tz(moment(), tz).format('h:mm A'));
     const timer = setInterval(() => {
       setTime(moment.tz(moment(), tz).format('h:mm A'));
     }, 60 * 1000);
