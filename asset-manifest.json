@@ -1,23 +1,27 @@
 {
   "files": {
-    "main.css": "/weather.bulletin/static/css/main.0ae539d1.chunk.css",
-    "main.js": "/weather.bulletin/static/js/main.f930f597.chunk.js",
-    "main.js.map": "/weather.bulletin/static/js/main.f930f597.chunk.js.map",
-    "runtime-main.js": "/weather.bulletin/static/js/runtime-main.33aaeebb.js",
-    "runtime-main.js.map": "/weather.bulletin/static/js/runtime-main.33aaeebb.js.map",
-    "static/js/2.0b1b7a6a.chunk.js": "/weather.bulletin/static/js/2.0b1b7a6a.chunk.js",
-    "static/js/2.0b1b7a6a.chunk.js.map": "/weather.bulletin/static/js/2.0b1b7a6a.chunk.js.map",
-    "static/js/3.2421bec5.chunk.js": "/weather.bulletin/static/js/3.2421bec5.chunk.js",
-    "static/js/3.2421bec5.chunk.js.map": "/weather.bulletin/static/js/3.2421bec5.chunk.js.map",
+    "main.css": "/weather.bulletin/static/css/main.b42a4076.chunk.css",
+    "main.js": "/weather.bulletin/static/js/main.9c2a3169.chunk.js",
+    "main.js.map": "/weather.bulletin/static/js/main.9c2a3169.chunk.js.map",
+    "runtime-main.js": "/weather.bulletin/static/js/runtime-main.3f4e6ebf.js",
+    "runtime-main.js.map": "/weather.bulletin/static/js/runtime-main.3f4e6ebf.js.map",
+    "static/css/2.2a03569f.chunk.css": "/weather.bulletin/static/css/2.2a03569f.chunk.css",
+    "static/js/2.2d2facf4.chunk.js": "/weather.bulletin/static/js/2.2d2facf4.chunk.js",
+    "static/js/2.2d2facf4.chunk.js.map": "/weather.bulletin/static/js/2.2d2facf4.chunk.js.map",
+    "static/js/3.4f0eb9ed.chunk.js": "/weather.bulletin/static/js/3.4f0eb9ed.chunk.js",
+    "static/js/3.4f0eb9ed.chunk.js.map": "/weather.bulletin/static/js/3.4f0eb9ed.chunk.js.map",
     "index.html": "/weather.bulletin/index.html",
-    "static/css/main.0ae539d1.chunk.css.map": "/weather.bulletin/static/css/main.0ae539d1.chunk.css.map",
-    "static/js/2.0b1b7a6a.chunk.js.LICENSE.txt": "/weather.bulletin/static/js/2.0b1b7a6a.chunk.js.LICENSE.txt",
-    "static/media/Fonts.scss": "/weather.bulletin/static/media/NHaasGroteskDSPro.1d3f2342.ttf"
+    "static/css/2.2a03569f.chunk.css.map": "/weather.bulletin/static/css/2.2a03569f.chunk.css.map",
+    "static/css/main.b42a4076.chunk.css.map": "/weather.bulletin/static/css/main.b42a4076.chunk.css.map",
+    "static/js/2.2d2facf4.chunk.js.LICENSE.txt": "/weather.bulletin/static/js/2.2d2facf4.chunk.js.LICENSE.txt",
+    "static/media/Fonts.scss": "/weather.bulletin/static/media/NHaasGroteskDSPro.1d3f2342.ttf",
+    "static/media/slick-theme.css": "/weather.bulletin/static/media/slick.c94f7671.ttf"
   },
   "entrypoints": [
-    "static/js/runtime-main.33aaeebb.js",
-    "static/js/2.0b1b7a6a.chunk.js",
-    "static/css/main.0ae539d1.chunk.css",
-    "static/js/main.f930f597.chunk.js"
+    "static/js/runtime-main.3f4e6ebf.js",
+    "static/css/2.2a03569f.chunk.css",
+    "static/js/2.2d2facf4.chunk.js",
+    "static/css/main.b42a4076.chunk.css",
+    "static/js/main.9c2a3169.chunk.js"
   ]
 }
