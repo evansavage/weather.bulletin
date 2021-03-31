@@ -13,26 +13,48 @@ html {
   // transform: translateX(-50%);
   text-align: center;
 }
+
+.zip-label {
+  position: relative;
+  margin-right: 20px;
+  top: 4px;
+  display: inline-block;
+  border-bottom: 1px solid grey;
+}
+
+.zip-clear {
+  position: absolute;
+  right: 5px;
+  cursor: pointer;
+  top: 0px;
+  svg {
+    width: 20px;
+    fill: rgba(0, 0, 0, 0.54);
+  }
+}
+
 .zip-input {
   outline: none;
   border: none;
-  border-bottom: 1px solid grey;
+  padding-left: 5px;
+  padding-bottom: 2px;
   background-color: transparent;
-  font-size: 1.15rem;
-  margin-right: 20px;
+  font-size: 1.4rem;
+  width: 150px;
   color: rgba(0, 0, 0, 0.54);
 }
 
-.zip-submit {
+#zip-submit {
   background-color: transparent;
   border-radius: 4px;
-  padding: 10px 12px;
+  padding: 5px 12px;
   border: 1px solid grey;
   color: rgba(0, 0, 0, 0.54);
   cursor: pointer;
   transition: all 0.2s;
   font-size: 0.875rem;
   outline: none;
+  text-transform: none;
   &:hover {
     background-color: rgba(0, 0, 0, 0.12);
   }
