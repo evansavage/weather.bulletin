@@ -1,23 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+
+import './scss/Fonts.scss';
+import './scss/App.scss';
+
+import SearchBar from './components/searchBar.js'
 
 function App() {
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="outer-wrapper">
+      <div className="nav-border-wrapper">
+        <div className="nav-wrapper">
+          <h1>WEATHER.BULLETIN</h1>
+          <SearchBar />
+        </div>
+      </div>
+
+      <div id="weather-day-container"></div>
     </div>
   );
 }
