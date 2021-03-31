@@ -27,6 +27,9 @@ html {
   right: 5px;
   cursor: pointer;
   top: 0px;
+  background-color: transparent;
+  border: none;
+  outline: none;
   svg {
     width: 20px;
     fill: rgba(0, 0, 0, 0.54);
@@ -109,13 +112,12 @@ html {
 .weather-header-wrapper {
   max-width: 1440px;
   margin: 80px auto 40px;
-  padding: 0 45px;
   display: flex;
   align-items: center;
 }
 
 .weather-header {
-  margin: 0 80px 0 0px;
+  margin: 0 70px 0 0px;
   display: inline;
   font-weight: 300;
   font-size: 2rem;
@@ -131,13 +133,17 @@ html {
 .current-time {
   font-size: 1.5rem;
   font-weight: 300;
-  margin-right: 40px;
+  margin-right: 35px;
+  width: 110px;
+  text-align: right;
 }
 
 .current-weather {
   font-size: 1.5rem;
   margin-right: 15px;
   font-weight: 500;
+  width: 45px;
+  text-align: right;
 }
 
 .current-icon {
@@ -153,22 +159,62 @@ html {
 }
 
 #weather-day-container {
-  padding-left: 60px;
-  padding-right: 60px;
+  padding-left: 100px;
+  padding-right: 100px;
+  max-width: 1440px;
+  margin: 0 auto;
 }
 
 .day-container {
-  display: flex;
+  // display: flex;
   max-width: 1440px;
   margin: 0 auto;
   // font-family: sans-serif;
 }
 
+.custom-weather-slider {
+  max-width: 1440px;
+  margin-left: auto;
+  margin-right: auto;
+  .slick-list {
+
+  }
+  .slick-track {
+    display: flex;
+  }
+}
+
+.custom-weather-slider:after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  width: 100px;
+  top: 0;
+  height: 100%;
+  pointer-events: none; /*makes the linkes behind clickable.*/
+}
+
+.custom-weather-slider:after {
+  right: 0;
+  background: linear-gradient(to left, $html-background-color, transparent);
+}
+
+.slick-slide {
+  // width: 240px;
+  // margin-right: 55px;
+  padding: 15px 80px 15px 0px;
+  @media(max-width: 769px) {
+    padding: 15px 70px 15px 0px;
+  }
+}
+
 .day-wrapper {
   // border: 1px solid grey;
   // width: 240px;
-  padding: 15px 45px;
-  flex: 1;
+  // padding: 15px 45px;
+  outline: none;
+  width: 230px;
+  // flex: 1;
   // background-color: $weather-card-background-color;
   // border-radius: 10px;
   .date-wrapper {
@@ -196,6 +242,31 @@ html {
     }
   }
 }
+
+.current-day-weather {
+  display: flex;
+  .current-time-wrapper {
+    display: flex;
+    align-items: center;
+    font-size: 1.1rem;
+    color: $light-font-color;
+    .hour-temp {
+      text-align: right;
+      width: 30px;
+      font-weight: 400;
+    }
+    .hour-time {
+      width: 75px;
+      font-weight: 300;
+      text-align: right;
+    }
+    img {
+      width: 50px;
+      height: 50px;
+    }
+  }
+}
+
 
 .time-wrapper {
   display: flex;

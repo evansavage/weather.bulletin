@@ -6,12 +6,8 @@ import ToggleButton from '@material-ui/lab/ToggleButton';
 import ToggleButtonGroup from '@material-ui/lab/ToggleButtonGroup';
 import Button from '@material-ui/core/Button';
 import CloseIcon from '@material-ui/icons/Close';
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import $ from 'jquery';
-
-function useQuery() {
-  return new URLSearchParams(window.location.search);
-}
 
 export default function SearchBar () {
 
@@ -48,9 +44,11 @@ export default function SearchBar () {
   }
 
   const clearZip = e => {
+    e.preventDefault();
     setZip('');
     params.set("zip", '');
     history.push({search: params.toString()});
+    $('.zip-input').focus();
   }
 
   function fetchData(units) {
@@ -100,7 +98,7 @@ export default function SearchBar () {
     <form className="zip-form" onSubmit={submitZip}>
       <label className="zip-label">
         <input className="zip-input" placeholder="Zip Code" type="text" onChange={changeZip} value={zip} maxLength="5" />
-        <a onClick={clearZip} className="zip-clear"><CloseIcon /></a>
+        <div className="zip-clear" onClick={clearZip}><CloseIcon /></div>
       </label>
       <Button id="zip-submit" type="submit">Check Weather</Button>
     </form>

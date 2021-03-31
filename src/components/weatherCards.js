@@ -1,15 +1,12 @@
 import zipcode_to_timezone from 'zipcode-to-timezone';
 import moment from 'moment-timezone';
 import getStateName from './getState.js';
-import React, { useEffect, useState, useRef } from 'react';
-
-function usePrevious(value) {
-  const ref = useRef();
-  useEffect(() => {
-    ref.current = value;
-  });
-  return ref.current;
-}
+import React, { useEffect, useState } from 'react';
+import Carousel, { SlidestoShowPlugin } from '@brainhubeu/react-carousel';
+import '@brainhubeu/react-carousel/lib/style.css';
+import Slider from 'react-slick';
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function WeatherCards ({weatherData, zipCode}) {
 
@@ -19,18 +16,20 @@ export default function WeatherCards ({weatherData, zipCode}) {
   var state_code = getStateName(zipCode)['code'];
   var tz = zipcode_to_timezone.lookup(zipCode);
   const [current_time, setTime] = useState(moment.tz(moment(), tz).format('h:mm A'));
-  const previousTZ = usePrevious(tz);
+  const [current_day, setDay] = useState(moment.tz(moment(), tz).format('YYYY-MM-DD'));
 
   useEffect (() => {
-    
+
     setTime(moment.tz(moment(), tz).format('h:mm A'));
+    setDay(moment.tz(moment(), tz).format('YYYY-MM-DD'));
     const timer = setInterval(() => {
       setTime(moment.tz(moment(), tz).format('h:mm A'));
+      setDay(moment.tz(moment(), tz).format('YYYY-MM-DD'));
     }, 60 * 1000);
     return () => {
       clearInterval(timer);
     }
-  }, [previousTZ, tz])
+  }, [tz])
 
   let dailyData = {};
   let last_day = '';
@@ -44,13 +43,8 @@ export default function WeatherCards ({weatherData, zipCode}) {
     var day_string = local_datetime.format('ddd, MMM Do');
     var time = local_datetime.format('h:mm A');
 
-    console.log(day, time,day_string);
-
-
     var inc_temp_min = Math.round(inc['main']['temp_min']);
     var inc_temp_max = Math.round(inc['main']['temp_max']);
-    console.log(day, inc_temp_min, inc_temp_max);
-    console.log(inc['weather'][0]);
 
     if (first_iter) {
       var current_temp = Math.round(inc['main']['temp']);
@@ -86,6 +80,31 @@ export default function WeatherCards ({weatherData, zipCode}) {
   }
   console.log(dailyData);
 
+  var settings = {
+    dots: false,
+    variableWidth: true,
+    infinite: false,
+    slidesToShow: 4,
+    focusOnSelect: false,
+    rows: 1,
+    responsive: [
+      {
+        breakpoint: 1025,
+        settings: {
+          slidesToShow: 3,
+          variableWidth: true
+        }
+      },
+      {
+        breakpoint: 769,
+        settings: {
+          slidesToShow: 2,
+          variableWidth: true
+        }
+      }
+    ]
+  }
+
   return (
     <>
       <div className="weather-header-wrapper">
@@ -93,12 +112,25 @@ export default function WeatherCards ({weatherData, zipCode}) {
         <div className="current-time">{current_time}</div>
         <div className="current-weather">{current_temp}&#730;</div>
         <img className="current-icon" alt={current_alt} src={image_url + current_icon + '@2x.png'} />
-
+      </div>
+      <div className="current-day-weather">
+        {
+          // dailyData[current_day].times.map((obj, index) => {
+          //   return (
+          //     <div key={index} className="current-time-wrapper">
+          //       <span className="hour-time">{obj['time']}</span>
+          //       <span className="hour-temp">{obj['temp']}&#730;</span>
+          //       <img alt={obj['weather']['main']} src={image_url + obj['weather']['icon'] + '@2x.png'} />
+          //     </div>
+          //   )
+          // })
+        }
       </div>
       <div className="day-container">
+      <Slider {...settings} className="custom-weather-slider">
       {
-        Object.keys(dailyData).map((key) => {
-          return (dailyData[key]['total_inc'] === 8) ?
+        Object.keys(dailyData).map((key, index) => {
+          return (index < 1000) ?
             <div key={key} className="day-wrapper">
               <div className="date-wrapper">
                 <span className="day-title">{dailyData[key]['string']}</span>
@@ -119,6 +151,7 @@ export default function WeatherCards ({weatherData, zipCode}) {
             ''
         })
       }
+      </Slider>
       </div>
     </>
   )
