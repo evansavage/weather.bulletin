@@ -18,7 +18,7 @@ export default function SearchBar () {
 
   const params = new URLSearchParams(history.location.search);
   const [zip, setZip] = useState(params.get('zip'));
-  const [units, setUnits] = useState(params.get('units') || 'imperial');
+  const [units, setUnits] = useState((params.get('units') !== null && params.get('units') !== '') ? params.get('units') : 'imperial');
 
 
   // On page load, fetch data if there is a zip code
@@ -31,7 +31,7 @@ export default function SearchBar () {
   // Display/hide clear button if there is a zip code
   useEffect(() => {
     if (zip) {
-      $('.zip-clear').css({'display': 'block'});
+      $('.zip-clear').css({'display': 'flex'});
     } else {
       $('.zip-clear').css({'display': 'none'});
     }
@@ -81,10 +81,10 @@ export default function SearchBar () {
 
 
   const changeUnits = (e, newUnits) => {
-    params.set('units', newUnits);
-    history.push({search: params.toString()});
     if (newUnits !== null) {
+      params.set('units', newUnits);
       setUnits(newUnits, fetchData(newUnits));
+      history.push({search: params.toString()});
     }
   }
 
@@ -96,10 +96,12 @@ export default function SearchBar () {
   return (
     <>
     <form className="zip-form" onSubmit={submitZip}>
-      <label className="zip-label">
-        <input className="zip-input" placeholder="Zip Code" type="text" onChange={changeZip} value={zip} maxLength="5" />
+      <div className="zip-input-wrapper">
+        <label className="zip-label">
+          <input className="zip-input" placeholder="Zip Code" type="text" onChange={changeZip} value={zip} maxLength="5" />
+        </label>
         <div className="zip-clear" onClick={clearZip}><CloseIcon /></div>
-      </label>
+      </div>
       <Button id="zip-submit" type="submit">Check Weather</Button>
     </form>
     <ToggleButtonGroup className="unit-buttons" value={units} exclusive onChange={changeUnits} aria-label="temperature units">
