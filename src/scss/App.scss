@@ -12,39 +12,56 @@ html {
 .zip-form {
   // left: 50%;
   // transform: translateX(-50%);
-  text-align: center;
+  // text-align: center;
 }
 
 .zip-label {
   position: relative;
-  margin-right: 20px;
+  // margin-right: 20px;
   top: 4px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   border-bottom: 1px solid grey;
 }
 
 .zip-clear {
   position: absolute;
+  display: flex;
   right: 5px;
   cursor: pointer;
-  top: 0px;
+  height: 24px;
+  width: 24px;
+  // align-items: center;
+  justify-content: center;
+  align-items: center;
+  // top: 0px;
+  top: 6px;
   background-color: transparent;
   border: none;
   outline: none;
+  // transform: translateY(-50%);
   svg {
-    width: 20px;
-    fill: rgba(0, 0, 0, 0.54);
+    fill: $light-font-color;
   }
+}
+
+.zip-input-wrapper {
+  position: relative;
+  display: inline-flex;
+  margin-right: 20px;
 }
 
 .zip-input {
   outline: none;
   border: none;
+  padding: 0 0 2px 5px;
   padding-left: 5px;
   padding-bottom: 2px;
   background-color: transparent;
   font-size: 1.4rem;
   width: 150px;
+  height: 30px;
+  margin: 0;
   color: rgba(0, 0, 0, 0.54);
 }
 
