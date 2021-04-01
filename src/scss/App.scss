@@ -1,5 +1,6 @@
 $weather-card-background-color: #d6d4d4;
-$html-background-color: #ded4dc;
+$html-background-color: rgba(222,212,220, 1);
+$html-background-color-blank: rgba(222,212,220, 0);
 $light-font-color: #676767;
 
 html {
@@ -196,7 +197,8 @@ html {
 
 .custom-weather-slider:after {
   right: 0;
-  background: linear-gradient(to left, $html-background-color, transparent);
+  background: linear-gradient(to right, $html-background-color-blank, $html-background-color);
+  background: -webkit-linear-gradient(to right, $html-background-color-blank, $html-background-color);
 }
 
 .slick-slide {
