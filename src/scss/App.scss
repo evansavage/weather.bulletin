@@ -13,12 +13,14 @@ html {
   // left: 50%;
   // transform: translateX(-50%);
   // text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 .zip-label {
   position: relative;
   // margin-right: 20px;
-  top: 4px;
+  top: 0px;
   display: inline-flex;
   align-items: center;
   border-bottom: 1px solid grey;
@@ -35,7 +37,7 @@ html {
   justify-content: center;
   align-items: center;
   // top: 0px;
-  top: 6px;
+  top: 5px;
   background-color: transparent;
   border: none;
   outline: none;
