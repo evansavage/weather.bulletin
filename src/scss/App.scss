@@ -37,13 +37,14 @@ html {
   justify-content: center;
   align-items: center;
   // top: 0px;
-  top: 5px;
+  top: 3px;
   background-color: transparent;
   border: none;
   outline: none;
   // transform: translateY(-50%);
   svg {
     fill: $light-font-color;
+    width: 18px;
   }
 }
 
@@ -58,7 +59,7 @@ html {
   border: none;
   padding: 0 0 2px 5px;
   padding-left: 5px;
-  padding-bottom: 2px;
+  padding-bottom: 0px;
   background-color: transparent;
   font-size: 1.4rem;
   width: 150px;
@@ -70,7 +71,7 @@ html {
 #zip-submit {
   background-color: transparent;
   border-radius: 4px;
-  padding: 5px 12px;
+  padding: 2px 12px;
   border: 1px solid grey;
   color: rgba(0, 0, 0, 0.54);
   cursor: pointer;
@@ -101,6 +102,9 @@ html {
     // letter-spacing: 0.2px;
     font-weight: normal;
     // flex: 1;
+    .title-small {
+      display: none;
+    }
   }
   &:first-child {
     margin-right: auto;
@@ -118,7 +122,7 @@ html {
 .unit-buttons {
   .MuiToggleButton-root {
     margin-left: auto;
-    padding: 6px 7px 6px 9px;
+    padding: 4px 7px 3px 9px;
     .MuiToggleButton-label {
       width: 18px;
       padding-left: 2px;
@@ -212,10 +216,7 @@ html {
   top: 0;
   height: 100%;
   pointer-events: none; /*makes the linkes behind clickable.*/
-}
-
-.custom-weather-slider:after {
-  right: 0;
+  right: -1px;
   background: linear-gradient(to right, $html-background-color-blank, $html-background-color);
 }
 
@@ -312,4 +313,77 @@ html {
     font-weight: 300;
     text-align: right;
   }
+}
+
+@media (max-width: 1024px) {
+  .zip-form {
+    flex: 2;
+  }
+  .unit-buttons {
+    .MuiToggleButton-root {
+      .MuiToggleButton-label {
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+@media(max-width: 769px) {
+  .nav-wrapper {
+    h1 {
+      flex: 1;
+    }
+
+  }
+  .unit-buttons {
+    flex: 0;
+    .MuiToggleButton-root {
+      .MuiToggleButton-label {
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 700px) {
+  #zip-submit {
+    display: none;
+  }
+}
+
+@media (max-width: 550px) {
+
+  .nav-wrapper {
+    h1 {
+      flex: 1;
+      .title-small {
+        display: inline-block;
+      }
+      .title-large {
+        display: none;
+      }
+    }
+  }
+  #weather-day-container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+  .weather-header-wrapper {
+    margin: 40px auto 20px;
+    flex-wrap: wrap;
+    .weather-header {
+      margin: 0;
+      width: 100%;
+      font-size: 1.8rem;
+    }
+    .current-time {
+      text-align: left;
+      margin-right: 15px;
+    }
+  }
+
 }

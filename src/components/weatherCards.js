@@ -101,6 +101,13 @@ export default function WeatherCards ({weatherData, zipCode}) {
           slidesToShow: 2,
           variableWidth: true
         }
+      },
+      {
+        breakpoint: 501,
+        settings: {
+          slidesToShow: 1,
+          variableWidth: true
+        }
       }
     ]
   }

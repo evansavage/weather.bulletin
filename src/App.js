@@ -10,7 +10,10 @@ function App() {
     <div className="outer-wrapper">
       <div className="nav-border-wrapper">
         <div className="nav-wrapper">
-          <h1>WEATHER.BULLETIN</h1>
+          <h1>
+            <span className="title-large">WEATHER.BULLETIN</span>
+            <span className="title-small">W.B</span>
+          </h1>
           <SearchBar />
         </div>
       </div>
