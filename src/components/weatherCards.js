@@ -7,8 +7,6 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import $ from 'jquery';
-
 export default function WeatherCards ({weatherData, zipCode}) {
 
   var image_url = 'https://openweathermap.org/img/wn/'
@@ -17,7 +15,6 @@ export default function WeatherCards ({weatherData, zipCode}) {
   var state_code = getStateName(zipCode)['code'];
   var tz = zipcode_to_timezone.lookup(zipCode);
   const [current_time, setTime] = useState(moment.tz(moment(), tz).format('h:mm A'));
-  const [current_day, setDay] = useState(moment.tz(moment(), tz).format('YYYY-MM-DD'));
   const [slides, setSlides] = useState();
   // const [nav, setNav] = useState();
   const sliderRef = useRef();
@@ -25,11 +22,9 @@ export default function WeatherCards ({weatherData, zipCode}) {
   useEffect (() => {
 
     setTime(moment.tz(moment(), tz).format('h:mm A'));
-    setDay(moment.tz(moment(), tz).format('YYYY-MM-DD'));
     sliderRef.current.slickGoTo(0);
     const timer = setInterval(() => {
       setTime(moment.tz(moment(), tz).format('h:mm A'));
-      setDay(moment.tz(moment(), tz).format('YYYY-MM-DD'));
     }, 60 * 1000);
     return () => {
       clearInterval(timer);
@@ -39,12 +34,12 @@ export default function WeatherCards ({weatherData, zipCode}) {
   let dailyData = {};
   let last_day = '';
   let first_iter = true;
-  var fired = true;
   const slide = (y) => {
       (y > 0)
         ? sliderRef.current.slickNext()
         : sliderRef.current.slickPrev();
   }
+
   var swipe = true;
   var swipeThresh = 0.5;
   var swipeDiv = 50;
@@ -74,6 +69,7 @@ export default function WeatherCards ({weatherData, zipCode}) {
       var current_temp = Math.round(inc['main']['temp']);
       var current_icon = inc['weather'][0]['icon'];
       var current_alt = inc['weather'][0]['main'];
+      var current_precip = inc['pop'];
       first_iter = false;
     }
 
@@ -95,7 +91,8 @@ export default function WeatherCards ({weatherData, zipCode}) {
     dailyData[day]['times'].push({
       "time": time,
       "weather": inc['weather'][0],
-      "temp": Math.round(inc['main']['temp'])
+      "temp": Math.round(inc['main']['temp']),
+      "pop": inc['pop']
     })
 
     console.log(dailyData[day]);
@@ -150,18 +147,10 @@ export default function WeatherCards ({weatherData, zipCode}) {
         <div className="current-time">{current_time}</div>
         <div className="current-weather">{current_temp}&#730;</div>
         <img className="current-icon" alt={current_alt} src={image_url + current_icon + '@2x.png'} />
-      </div>
-      <div className="current-day-weather">
         {
-          // dailyData[current_day].times.map((obj, index) => {
-          //   return (
-          //     <div key={index} className="current-time-wrapper">
-          //       <span className="hour-time">{obj['time']}</span>
-          //       <span className="hour-temp">{obj['temp']}&#730;</span>
-          //       <img alt={obj['weather']['main']} src={image_url + obj['weather']['icon'] + '@2x.png'} />
-          //     </div>
-          //   )
-          // })
+          (current_precip > 0)
+            ? <span className="precip-percent">{Math.round(current_precip * 100)}%</span>
+            : ''
         }
       </div>
       <div className="day-container">
@@ -177,11 +166,20 @@ export default function WeatherCards ({weatherData, zipCode}) {
               </div>
               {dailyData[key].times.map((obj, index) => {
                 return (
+                  <>
+                  <div className="time-percent-wrapper">
                   <div key={key + '-' + index} className="time-wrapper">
                     <span className="hour-time">{obj['time']}</span>
                     <span className="hour-temp">{obj['temp']}&#730;</span>
                     <img alt={obj['weather']['main']} src={image_url + obj['weather']['icon'] + '@2x.png'} />
                   </div>
+                  {
+                    (obj['pop'] > 0)
+                      ? <span className="precip-percent">{Math.round(obj['pop'] * 100)}%</span>
+                      : ''
+                  }
+                  </div>
+                  </>
                 )
               })}
             </div>

@@ -292,6 +292,7 @@ html, body {
   // width: 240px;
   // margin-right: 55px;
   padding: 15px 80px 15px 0;
+  min-width: 220px;
 }
 
 
@@ -355,6 +356,30 @@ html, body {
   }
 }
 
+.precip-percent {
+  color: rgba(27, 109, 234, 0.68);
+}
+
+.time-percent-wrapper {
+  position: relative;
+  .precip-percent {
+    position: absolute;
+    left: 90%;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 0.75rem;
+  }
+}
+
+.weather-header-wrapper {
+  position: relative;
+  .precip-percent {
+    font-size: 1.2rem;
+    margin-left: 10px;
+    position: absolute;
+    right: -50px;
+  }
+}
 
 .time-wrapper {
   display: flex;
@@ -363,9 +388,10 @@ html, body {
   // width: ;
   font-size: 0.9rem;
   color: $light-font-color;
-  margin-left: 20px;
+  // margin-left: 20px;
   margin-right: 10px;
   margin-bottom: 5px;
+  max-width: 85%;
   img {
     width: 40px;
     height: 40px;
@@ -421,7 +447,7 @@ html, body {
   }
 }
 
-@media(max-width: 840px) {
+@media(max-width: 880px) {
   .nav-wrapper {
     h1 {
       flex: 1;
@@ -449,6 +475,10 @@ html, body {
     .current-time {
       text-align: left;
       margin-right: 5px;
+    }
+    .precip-percent {
+      position: relative;
+      right: auto;
     }
   }
   .custom-weather-slider {
@@ -516,6 +546,7 @@ html, body {
       font-size: 1.4rem;
       text-align: left;
       margin-right: 0px;
+      display: none;
     }
     .current-weather {
       font-size: 1.4rem;
