@@ -10,17 +10,14 @@ import "slick-carousel/slick/slick-theme.css";
 export default function WeatherCards ({weatherData, zipCode}) {
 
   var image_url = 'https://openweathermap.org/img/wn/'
-  console.log(weatherData['list']);
   var city_name = weatherData['city']['name'];
   var state_code = getStateName(zipCode)['code'];
   var tz = zipcode_to_timezone.lookup(zipCode);
+
   const [current_time, setTime] = useState(moment.tz(moment(), tz).format('h:mm A'));
-  const [slides, setSlides] = useState();
-  // const [nav, setNav] = useState();
   const sliderRef = useRef();
 
   useEffect (() => {
-
     setTime(moment.tz(moment(), tz).format('h:mm A'));
     sliderRef.current.slickGoTo(0);
     const timer = setInterval(() => {
@@ -29,33 +26,11 @@ export default function WeatherCards ({weatherData, zipCode}) {
     return () => {
       clearInterval(timer);
     }
-  }, [tz])
+  }, [tz, sliderRef])
 
   let dailyData = {};
   let last_day = '';
   let first_iter = true;
-  const slide = (y) => {
-      (y > 0)
-        ? sliderRef.current.slickNext()
-        : sliderRef.current.slickPrev();
-  }
-
-  var swipe = true;
-  var swipeThresh = 0.5;
-  var swipeDiv = 50;
-
-  window.addEventListener('wheel', (e) => {
-    e.preventDefault();
-    if ((e.deltaX / swipeDiv >= swipeThresh || e.deltaX / swipeDiv <= -swipeThresh) && swipe) {
-      swipe = false;
-      slide(e.deltaX);
-    } else {
-      swipe = true;
-    }
-  })
-
-  var averageDayID = 0;
-  var timeCount = 1;
 
   for (const x in weatherData['list']) {
     var inc = weatherData['list'][x];
@@ -78,8 +53,6 @@ export default function WeatherCards ({weatherData, zipCode}) {
 
     // new day
     if (day !== last_day) {
-      averageDayID = 0;
-      timeCount = 1;
       dailyData[day] = {}
       dailyData[day]['class_counts'] = {};
       dailyData[day]['times'] = []
@@ -103,24 +76,37 @@ export default function WeatherCards ({weatherData, zipCode}) {
       "pop": inc['pop']
     })
 
-    console.log(dailyData[day]);
     last_day = day;
     dailyData[day]['total_inc'] += 1;
-    // if (!dailyData[day]['class_counts'][Math.floor(inc['weather'][0]['id']/100)*100]) {
-    //   dailyData[day]['class_counts'][Math.floor(inc['weather'][0]['id']/100)*100] = 0;
-    // }
-    // dailyData[day]['class_counts'][Math.floor(inc['weather'][0]['id']/100)*100] += 1;
-    console.log(local_datetime.hour())
+
     if (!dailyData[day]['class_counts'][inc['weather'][0]['icon'].slice(0,2) + 'd']) {
       dailyData[day]['class_counts'][inc['weather'][0]['icon'].slice(0,2) + 'd'] = 0;
-      // dailyData[day]['class_counts'][inc['weather'][0]['id']]['count'] = 0
-      // dailyData[day]['class_counts'][inc['weather'][0]['id']]['icon'] = inc['weather'][0]['icon'].slice(0,2) + 'd';
     }
     if (local_datetime.hour() > 6 && local_datetime.hour() < 20) {
       dailyData[day]['class_counts'][inc['weather'][0]['icon'].slice(0,2) + 'd'] += 1;
     }
   }
-  console.log(dailyData);
+
+  var swipe = true;
+  var swipeThresh = 0.5;
+  var swipeDiv = 50;
+
+  const slide = (y) => {
+      (y > 0)
+        ? sliderRef.current.slickNext()
+        : sliderRef.current.slickPrev();
+  }
+
+  window.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    if ((e.deltaX / swipeDiv >= swipeThresh || e.deltaX / swipeDiv <= -swipeThresh)
+      && swipe) {
+      swipe = false;
+      slide(e.deltaX);
+    } else {
+      swipe = true;
+    }
+  })
 
   var settings = {
     dots: true,
@@ -132,10 +118,6 @@ export default function WeatherCards ({weatherData, zipCode}) {
     draggable: true,
     rows: 1,
     swipe: true,
-    beforeChange: () => {
-      setSlides(sliderRef.current.innerSlider.state.currentSlide);
-      console.log(slides);
-    },
     responsive: [
       {
         breakpoint: 40000,
@@ -164,8 +146,6 @@ export default function WeatherCards ({weatherData, zipCode}) {
     ]
   }
 
-  var maxValue = Math.max.apply(null, )
-
   return (
     <>
       <div className="weather-header-wrapper">
@@ -190,9 +170,10 @@ export default function WeatherCards ({weatherData, zipCode}) {
                 <span className="day-title">{dailyData[key]['string']}</span>
                 <span className="max-temp">{dailyData[key]['max']}&#730;</span>
                 <span className="min-temp">{dailyData[key]['min']}&#730;</span>
-                <img className="daily-icon" src={image_url + Object.keys(dailyData[key]['class_counts']).reduce((a,b) => dailyData[key]['class_counts'][a] > dailyData[key]['class_counts'][b] ? a : b) + '@2x.png'} />
+                <img className="daily-icon" alt="daily-weather-icon" src={image_url + Object.keys(dailyData[key]['class_counts']).reduce((a,b) => dailyData[key]['class_counts'][a] > dailyData[key]['class_counts'][b] ? a : b) + '@2x.png'} />
               </div>
-              {dailyData[key].times.map((obj, index) => {
+              {
+                dailyData[key].times.map((obj, index) => {
                 return (
                   <>
                   <div className="time-percent-wrapper">
@@ -208,8 +189,8 @@ export default function WeatherCards ({weatherData, zipCode}) {
                   }
                   </div>
                   </>
-                )
-              })}
+                )})
+              }
             </div>
           :
             ''

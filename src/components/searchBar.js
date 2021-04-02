@@ -13,10 +13,10 @@ export default function SearchBar () {
 
   const api_key = 'b8c57c1c1fe78770517a0b492af57a54';
   const api_url = 'https://api.openweathermap.org/data/2.5/forecast';
-  // const [query, setQuery] = useState('');
-  const history = useHistory();
 
+  const history = useHistory();
   const params = new URLSearchParams(history.location.search);
+
   const [zip, setZip] = useState(params.get('zip'));
   const [units, setUnits] = useState((params.get('units') !== null && params.get('units') !== '') ? params.get('units') : 'imperial');
 
@@ -39,8 +39,6 @@ export default function SearchBar () {
 
   const changeZip = e => {
     setZip(e.target.value);
-    params.set("zip", e.target.value);
-    history.push({search: params.toString()});
   }
 
   const clearZip = e => {
@@ -93,6 +91,8 @@ export default function SearchBar () {
 
   const submitZip = e => {
     e.preventDefault();
+    params.set("zip", zip);
+    history.push({search: params.toString()});
     fetchData(units);
   }
 
