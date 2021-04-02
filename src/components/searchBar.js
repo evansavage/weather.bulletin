@@ -66,7 +66,10 @@ export default function SearchBar () {
         }
       })
       .then(data => {
-        return ReactDOM.render(<WeatherCards weatherData={data} zipCode={zip} />, document.getElementById('weather-day-container'));
+        return ReactDOM.render(
+          <WeatherCards weatherData={data} zipCode={zip} />,
+          document.getElementById('weather-day-container')
+          );
       })
       .catch(error => {
         return ReactDOM.render(

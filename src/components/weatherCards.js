@@ -1,12 +1,40 @@
 import zipcode_to_timezone from 'zipcode-to-timezone';
 import moment from 'moment-timezone';
 import getStateName from './getState.js';
-import React, { useEffect, useState } from 'react';
-import Carousel, { SlidestoShowPlugin } from '@brainhubeu/react-carousel';
-import '@brainhubeu/react-carousel/lib/style.css';
+import React, { useEffect, useState, useRef } from 'react';
+
 import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+
+import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
+import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
+
+import $ from 'jquery';
+
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "red" }}
+      onClick={onClick}
+    >
+      Peepee
+    </div>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "green" }}
+      onClick={onClick}
+    />
+  );
+}
 
 export default function WeatherCards ({weatherData, zipCode}) {
 
@@ -17,11 +45,20 @@ export default function WeatherCards ({weatherData, zipCode}) {
   var tz = zipcode_to_timezone.lookup(zipCode);
   const [current_time, setTime] = useState(moment.tz(moment(), tz).format('h:mm A'));
   const [current_day, setDay] = useState(moment.tz(moment(), tz).format('YYYY-MM-DD'));
+  const [slides, setSlides] = useState();
+  // const [nav, setNav] = useState();
+  const sliderRef = useRef();
 
   useEffect (() => {
 
     setTime(moment.tz(moment(), tz).format('h:mm A'));
     setDay(moment.tz(moment(), tz).format('YYYY-MM-DD'));
+    sliderRef.current.slickGoTo(0);
+    console.log(sliderRef.current.innerSlider.state.currentSlide);
+    // var slideState = sliderRef.current.innerSlider.state;
+    // var prevClass = (slideState.currentSlide > 0) ? $('.custom-prev-icon').removeClass('disabled') : $('.custom-prev-icon').addClass('disabled');
+    // var nextClass = (slideState.currentSlide < slideState.slideCount - 1) ? '' : 'disabled';
+    // $('custom-prev-icon')
     const timer = setInterval(() => {
       setTime(moment.tz(moment(), tz).format('h:mm A'));
       setDay(moment.tz(moment(), tz).format('YYYY-MM-DD'));
@@ -34,6 +71,26 @@ export default function WeatherCards ({weatherData, zipCode}) {
   let dailyData = {};
   let last_day = '';
   let first_iter = true;
+
+  const prev = () => {
+    sliderRef.current.slickPrev();
+    (sliderRef.current.innerSlider.state.currentSlide > 0)
+      ? $('.custom-prev-icon').removeClass('disabled')
+      : $('.custom-prev-icon').addClass('disabled');
+    (sliderRef.current.innerSlider.state.currentSlide < sliderRef.current.innerSlider.state.slideCount - 1)
+      ? $('.custom-next-icon').addClass('disabled')
+      : $('.custom-next-icon').removeClass('disabled');
+  }
+
+  const next = () => {
+    sliderRef.current.slickNext();
+    (sliderRef.current.innerSlider.state.currentSlide > 0)
+      ? $('.custom-prev-icon').removeClass('disabled')
+      : $('.custom-prev-icon').addClass('disabled');
+    (sliderRef.current.innerSlider.state.currentSlide < sliderRef.current.innerSlider.state.slideCount - 1)
+      ? $('.custom-next-icon').addClass('disabled')
+      : $('.custom-next-icon').removeClass('disabled');
+  }
 
   for (const x in weatherData['list']) {
     var inc = weatherData['list'][x];
@@ -86,6 +143,8 @@ export default function WeatherCards ({weatherData, zipCode}) {
     infinite: false,
     slidesToShow: 4,
     focusOnSelect: false,
+    arrows: true,
+    draggable: true,
     rows: 1,
     responsive: [
       {
@@ -134,7 +193,7 @@ export default function WeatherCards ({weatherData, zipCode}) {
         }
       </div>
       <div className="day-container">
-      <Slider {...settings} className="custom-weather-slider">
+      <Slider ref={sliderRef} {...settings} className="custom-weather-slider" >
       {
         Object.keys(dailyData).map((key, index) => {
           return (index < 1000) ?
