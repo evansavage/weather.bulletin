@@ -101,7 +101,7 @@ export default function SearchBar () {
     <form className="zip-form" onSubmit={submitZip}>
       <div className="zip-input-wrapper">
         <label className="zip-label">
-          <input className="zip-input" inputMode="numeric" placeholder="Zip Code" type="text" onChange={changeZip} value={zip} maxLength="5" />
+          <input className="zip-input" placeholder="Zip Code" type="text" onChange={changeZip} value={zip} maxLength="5" />
         </label>
         <div className="zip-clear" onClick={clearZip}><CloseIcon /></div>
       </div>
