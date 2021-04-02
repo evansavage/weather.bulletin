@@ -170,10 +170,10 @@ export default function WeatherCards ({weatherData, zipCode}) {
     <>
       <div className="weather-header-wrapper">
         <h2 className="weather-header">{city_name}, {state_code}</h2>
-        <img className="current-icon" alt={current_alt} src={image_url + current_icon + '@2x.png'} />
         <div class="line-break"></div>
         <div className="current-time">{current_time}</div>
         <div className="current-weather">{current_temp}&#730;</div>
+        <img className="current-icon" alt={current_alt} src={image_url + current_icon + '@2x.png'} />
         {
           (current_precip > 0)
             ? <span className="precip-percent">{Math.round(current_precip * 100)}%</span>
@@ -187,10 +187,10 @@ export default function WeatherCards ({weatherData, zipCode}) {
           return (index < 1000) ?
             <div key={key} className="day-wrapper">
               <div className="date-wrapper">
-                <img className="daily-icon" src={image_url + Object.keys(dailyData[key]['class_counts']).reduce((a,b) => dailyData[key]['class_counts'][a] > dailyData[key]['class_counts'][b] ? a : b) + '@2x.png'} />
                 <span className="day-title">{dailyData[key]['string']}</span>
                 <span className="max-temp">{dailyData[key]['max']}&#730;</span>
                 <span className="min-temp">{dailyData[key]['min']}&#730;</span>
+                <img className="daily-icon" src={image_url + Object.keys(dailyData[key]['class_counts']).reduce((a,b) => dailyData[key]['class_counts'][a] > dailyData[key]['class_counts'][b] ? a : b) + '@2x.png'} />
               </div>
               {dailyData[key].times.map((obj, index) => {
                 return (
