@@ -19,7 +19,6 @@ export default function WeatherCards ({weatherData, zipCode}) {
 
   useEffect (() => {
     setTime(moment.tz(moment(), tz).format('h:mm A'));
-    sliderRef.current.slickGoTo(0);
     const timer = setInterval(() => {
       setTime(moment.tz(moment(), tz).format('h:mm A'));
     }, 60 * 1000);
@@ -118,32 +117,33 @@ export default function WeatherCards ({weatherData, zipCode}) {
     draggable: true,
     rows: 1,
     swipe: true,
-    responsive: [
-      {
-        breakpoint: 40000,
-        settings: {
-          slidesToShow: 4,
-        }
-      },
-      {
-        breakpoint: 1490,
-        settings: {
-          slidesToShow: 3,
-        }
-      },
-      {
-        breakpoint: 1168,
-        settings: {
-          slidesToShow: 2,
-        }
-      },
-      {
-        breakpoint: 694,
-        settings: {
-          slidesToShow: 1,
-        }
-      }
-    ]
+    vertical: true
+    // responsive: [
+    //   {
+    //     breakpoint: 40000,
+    //     settings: {
+    //       slidesToShow: 4,
+    //     }
+    //   },
+    //   {
+    //     breakpoint: 1490,
+    //     settings: {
+    //       slidesToShow: 3,
+    //     }
+    //   },
+    //   {
+    //     breakpoint: 1168,
+    //     settings: {
+    //       slidesToShow: 2,
+    //     }
+    //   },
+    //   {
+    //     breakpoint: 694,
+    //     settings: {
+    //       slidesToShow: 1,
+    //     }
+    //   }
+    // ]
   }
 
   return (
@@ -161,7 +161,6 @@ export default function WeatherCards ({weatherData, zipCode}) {
         }
       </div>
       <div className="day-container">
-      <Slider ref={sliderRef} {...settings} className="custom-weather-slider" >
       {
         Object.keys(dailyData).map((key, index) => {
           return (index < 1000) ?
@@ -173,30 +172,29 @@ export default function WeatherCards ({weatherData, zipCode}) {
                 <img className="daily-icon" alt="daily-weather-icon" src={image_url + Object.keys(dailyData[key]['class_counts']).reduce((a,b) => dailyData[key]['class_counts'][a] > dailyData[key]['class_counts'][b] ? a : b) + '@2x.png'} />
               </div>
               {
-                dailyData[key].times.map((obj, index) => {
-                return (
-                  <>
-                  <div className="time-percent-wrapper">
-                  <div key={key + '-' + index} className="time-wrapper">
-                    <span className="hour-time">{obj['time']}</span>
-                    <span className="hour-temp">{obj['temp']}&#730;</span>
-                    <img alt={obj['weather']['main']} src={image_url + obj['weather']['icon'] + '@2x.png'} />
-                  </div>
-                  {
-                    (obj['pop'] > 0)
-                      ? <span className="precip-percent">{Math.round(obj['pop'] * 100)}%</span>
-                      : ''
-                  }
-                  </div>
-                  </>
-                )})
+                // dailyData[key].times.map((obj, index) => {
+                // return (
+                //   <>
+                //   <div className="time-percent-wrapper">
+                //   <div key={key + '-' + index} className="time-wrapper">
+                //     <span className="hour-time">{obj['time']}</span>
+                //     <span className="hour-temp">{obj['temp']}&#730;</span>
+                //     <img alt={obj['weather']['main']} src={image_url + obj['weather']['icon'] + '@2x.png'} />
+                //   </div>
+                //   {
+                //     (obj['pop'] > 0)
+                //       ? <span className="precip-percent">{Math.round(obj['pop'] * 100)}%</span>
+                //       : ''
+                //   }
+                //   </div>
+                //   </>
+                // )})
               }
             </div>
           :
             ''
         })
       }
-      </Slider>
       </div>
     </>
   )
