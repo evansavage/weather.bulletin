@@ -54,6 +54,9 @@ export default function WeatherCards ({weatherData, zipCode}) {
     }
   })
 
+  var averageDayID = 0;
+  var timeCount = 1;
+
   for (const x in weatherData['list']) {
     var inc = weatherData['list'][x];
 
@@ -73,14 +76,19 @@ export default function WeatherCards ({weatherData, zipCode}) {
       first_iter = false;
     }
 
+    // new day
     if (day !== last_day) {
+      averageDayID = 0;
+      timeCount = 1;
       dailyData[day] = {}
+      dailyData[day]['class_counts'] = {};
       dailyData[day]['times'] = []
       dailyData[day]['string'] = day_string;
       dailyData[day]['min'] = 10000000;
       dailyData[day]['max'] = 0;
       dailyData[day]['total_inc'] = 0
     }
+
     if (inc_temp_min < dailyData[day]['min']) {
       dailyData[day]['min'] = inc_temp_min;
     }
@@ -97,12 +105,25 @@ export default function WeatherCards ({weatherData, zipCode}) {
 
     console.log(dailyData[day]);
     last_day = day;
-    dailyData[day]['total_inc'] += 1
+    dailyData[day]['total_inc'] += 1;
+    // if (!dailyData[day]['class_counts'][Math.floor(inc['weather'][0]['id']/100)*100]) {
+    //   dailyData[day]['class_counts'][Math.floor(inc['weather'][0]['id']/100)*100] = 0;
+    // }
+    // dailyData[day]['class_counts'][Math.floor(inc['weather'][0]['id']/100)*100] += 1;
+    console.log(local_datetime.hour())
+    if (!dailyData[day]['class_counts'][inc['weather'][0]['icon'].slice(0,2) + 'd']) {
+      dailyData[day]['class_counts'][inc['weather'][0]['icon'].slice(0,2) + 'd'] = 0;
+      // dailyData[day]['class_counts'][inc['weather'][0]['id']]['count'] = 0
+      // dailyData[day]['class_counts'][inc['weather'][0]['id']]['icon'] = inc['weather'][0]['icon'].slice(0,2) + 'd';
+    }
+    if (local_datetime.hour() > 6 && local_datetime.hour() < 20) {
+      dailyData[day]['class_counts'][inc['weather'][0]['icon'].slice(0,2) + 'd'] += 1;
+    }
   }
   console.log(dailyData);
 
   var settings = {
-    // dots: true,
+    dots: true,
     variableWidth: true,
     infinite: false,
     slidesToShow: 4,
@@ -119,29 +140,23 @@ export default function WeatherCards ({weatherData, zipCode}) {
       {
         breakpoint: 40000,
         settings: {
-          slidesToShow: 5,
-        }
-      },
-      {
-        breakpoint: 1640,
-        settings: {
           slidesToShow: 4,
         }
       },
       {
-        breakpoint: 1300,
+        breakpoint: 1490,
         settings: {
           slidesToShow: 3,
         }
       },
       {
-        breakpoint: 966,
+        breakpoint: 1168,
         settings: {
           slidesToShow: 2,
         }
       },
       {
-        breakpoint: 657,
+        breakpoint: 694,
         settings: {
           slidesToShow: 1,
         }
@@ -149,13 +164,16 @@ export default function WeatherCards ({weatherData, zipCode}) {
     ]
   }
 
+  var maxValue = Math.max.apply(null, )
+
   return (
     <>
       <div className="weather-header-wrapper">
         <h2 className="weather-header">{city_name}, {state_code}</h2>
+        <img className="current-icon" alt={current_alt} src={image_url + current_icon + '@2x.png'} />
+        <div class="line-break"></div>
         <div className="current-time">{current_time}</div>
         <div className="current-weather">{current_temp}&#730;</div>
-        <img className="current-icon" alt={current_alt} src={image_url + current_icon + '@2x.png'} />
         {
           (current_precip > 0)
             ? <span className="precip-percent">{Math.round(current_precip * 100)}%</span>
@@ -169,6 +187,7 @@ export default function WeatherCards ({weatherData, zipCode}) {
           return (index < 1000) ?
             <div key={key} className="day-wrapper">
               <div className="date-wrapper">
+                <img className="daily-icon" src={image_url + Object.keys(dailyData[key]['class_counts']).reduce((a,b) => dailyData[key]['class_counts'][a] > dailyData[key]['class_counts'][b] ? a : b) + '@2x.png'} />
                 <span className="day-title">{dailyData[key]['string']}</span>
                 <span className="max-temp">{dailyData[key]['max']}&#730;</span>
                 <span className="min-temp">{dailyData[key]['min']}&#730;</span>

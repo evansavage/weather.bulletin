@@ -4,8 +4,8 @@ $html-background-color-blank: rgba(222,212,220, 0);
 $light-font-color: #676767;
 
 $large-weather-padding: 100px;
-$medium-weather-padding: 80px;
-$small-weather-padding: 40px;
+$medium-weather-padding: 40px;
+$small-weather-padding: 20px;
 
 $slick-slige-margin-large: 80px;
 $slick-slige-margin-medium: 70px;
@@ -21,7 +21,7 @@ html, body {
 
 .outer-wrapper {
   overflow: hidden;
-  min-height: 690px;
+  min-height: 750px;
 }
 
 
@@ -151,7 +151,7 @@ html, body {
 
 .weather-header-wrapper {
   max-width: 600px;
-  margin: 80px 0 30px;
+  margin: 60px 0 20px;
   display: flex;
   align-items: center;
 }
@@ -205,6 +205,21 @@ html, body {
   padding-right: $large-weather-padding;
   max-width: 1440px;
   margin: 0 auto;
+  // overflow: hidden;
+}
+
+#weather-day-container {
+  .slick-dots {
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.line-break {
+  width: 100%;
+  display: none;
 }
 
 .day-container {
@@ -228,10 +243,12 @@ html, body {
     display: flex;
   }
   .slick-prev, .slick-next {
-    top: -58px;
+    top: 50%;
+    transform: translate(-50%, -50%);
     width: 24px;
     height: 40px;
     padding: 6px;
+    z-index: 2;
     // opacity: 0.6;
     &.slick-disabled:before, &.slick-disabled:hover:before, &.slick-disabled:focus:before {
       opacity: 0.3;
@@ -248,15 +265,15 @@ html, body {
   }
 
   .slick-prev {
-    right: 35px;
-    left: auto;
+    left: -65px;
+    right: auto;
     &:before {
       content: url('arrow-left.svg');
     }
   }
   .slick-next {
-    right: 0;
-    // right: auto;
+    left: calc(100% + 65px);
+    right: auto;
     &:before {
       content: url('arrow-right.svg');
     }
@@ -267,7 +284,7 @@ html, body {
   content: "";
   position: absolute;
   z-index: 1;
-  width: $large-weather-padding / 2;
+  width: $large-weather-padding / 2 - 10px;
   top: 0;
   height: 100%;
   pointer-events: none; /*makes the linkes behind clickable.*/
@@ -280,7 +297,7 @@ html, body {
   content: "";
   position: absolute;
   z-index: 1;
-  width: $large-weather-padding / 2;
+  width: $large-weather-padding / 2 - 10px;
   top: 0;
   height: 100%;
   pointer-events: none; /*makes the linkes behind clickable.*/
@@ -292,8 +309,8 @@ html, body {
 .slick-slide {
   // width: 240px;
   // margin-right: 55px;
-  padding: 15px 80px 15px 0;
-  min-width: 220px;
+  padding: 15px 60px 15px 0;
+  min-width: 280px;
 }
 
 
@@ -311,7 +328,8 @@ html, body {
     font-size: 1.2rem;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 20px;
+    // margin-bottom: 10px;
+    align-items: center;
 
     .day-title {
       // font-family: nhaas;
@@ -392,10 +410,12 @@ html, body {
   // margin-left: 20px;
   margin-right: 10px;
   margin-bottom: 5px;
-  max-width: 85%;
+  max-width: 65%;
+  margin-left: 60px;
   img {
     width: 40px;
     height: 40px;
+    margin-left: -5px;
   }
   .hour-temp {
     text-align: right;
@@ -414,20 +434,29 @@ html, body {
     padding-left: $medium-weather-padding;
     padding-right: $medium-weather-padding;
   }
-  .slick-slide {
-    // width: 240px;
-    // margin-right: 55px;
-    padding: 15px 70px 15px 0;
+  // .slick-slide {
+  //   // width: 240px;
+  //   // margin-right: 55px;
+  //   padding: 15px 70px 15px 0;
+  // }
+
+  .custom-weather-slider {
+    .slick-prev {
+      left: -55px;
+    }
+    .slick-next {
+      left: calc(100% + 55px);
+    }
   }
 
   .custom-weather-slider:before {
-    width: $medium-weather-padding / 2;
+    width: $medium-weather-padding / 2 - 10px;
     // left: -1 * $medium-weather-padding  - $medium-weather-padding / 2;
     // border-left: $medium-weather-padding solid $html-background-color;
   }
 
   .custom-weather-slider:after {
-    width: $medium-weather-padding / 2;
+    width: $medium-weather-padding / 2 - 10px;
     // right: -1 * $medium-weather-padding  - $medium-weather-padding / 2;
     // border-right: $medium-weather-padding solid $html-background-color;
   }
@@ -467,15 +496,15 @@ html, body {
   }
   .weather-header-wrapper {
     flex-wrap: wrap;
-    margin: 80px 0 20px;
+    // margin: 60px 0 20px;
     .weather-header {
       margin: 0;
-      width: 100%;
+      // width: 100%;
       font-size: 1.8rem;
     }
     .current-time {
-      text-align: left;
-      margin-right: 5px;
+      // text-align: left;
+      // margin-right: 5px;
     }
     .precip-percent {
       position: relative;
@@ -484,17 +513,21 @@ html, body {
     }
   }
   .custom-weather-slider {
-    .slick-next, .slick-prev {
-      top: -48px;
-    }
     .slick-prev {
-      left: calc(100% - 40px);
+      // left: calc(100% - 40px);
     }
     .slick-next {
-      left: calc(100%);
+      // left: calc(100%);
 
     }
   }
+}
+
+.daily-icon {
+  display: flex;
+  justify-content: center;
+  width: 60px;
+  margin-right: 8px;
 }
 
 @media (max-width: 700px) {
@@ -503,9 +536,24 @@ html, body {
   }
 }
 
+@media (max-width: 632px) {
+  .line-break {
+    display: block;
+  }
+  .current-time {
+    text-align: left;
+    margin-right: 5px;
+  }
+}
+
 @media (max-width: 568px) {
   .zip-input {
     width: 120px;
+  }
+
+  .slick-slide {
+    min-width: 270px;
+    padding: 15px 50px 15px 0;
   }
 
   .nav-wrapper {
@@ -528,27 +576,29 @@ html, body {
   }
 
   .custom-weather-slider:before {
-    width: $small-weather-padding / 2;
+    width: 60px;
+    right: 95%;
     // left: -1 * $small-weather-padding  - $small-weather-padding / 2;
     // border-left: $small-weather-padding solid $html-background-color;
   }
 
   .custom-weather-slider:after {
-    width: $small-weather-padding / 2;
+    width: 60px;
+    left: 90%;
     // right: -1 * $small-weather-padding  - $small-weather-padding / 2;
     // border-right: $small-weather-padding solid $html-background-color;
   }
 
   .weather-header-wrapper {
-    margin: 50px auto 20px;
+    margin: 30px auto 15px;
     .weather-header {
       font-size: 1.7rem;
     }
     .current-time {
       font-size: 1.4rem;
-      text-align: left;
+      // text-align: left;
       margin-right: 0px;
-      display: none;
+      // display: none;
     }
     .current-weather {
       font-size: 1.4rem;
