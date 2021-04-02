@@ -15,6 +15,10 @@ html {
   background-color: $html-background-color;
 }
 
+html, body {
+   overscroll-behavior-x: none;
+}
+
 .outer-wrapper {
   overflow: hidden;
 }

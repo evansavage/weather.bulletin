@@ -7,34 +7,7 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
-
 import $ from 'jquery';
-
-function SampleNextArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", background: "red" }}
-      onClick={onClick}
-    >
-      Peepee
-    </div>
-  );
-}
-
-function SamplePrevArrow(props) {
-  const { className, style, onClick } = props;
-  return (
-    <div
-      className={className}
-      style={{ ...style, display: "block", background: "green" }}
-      onClick={onClick}
-    />
-  );
-}
 
 export default function WeatherCards ({weatherData, zipCode}) {
 
@@ -54,11 +27,6 @@ export default function WeatherCards ({weatherData, zipCode}) {
     setTime(moment.tz(moment(), tz).format('h:mm A'));
     setDay(moment.tz(moment(), tz).format('YYYY-MM-DD'));
     sliderRef.current.slickGoTo(0);
-    console.log(sliderRef.current.innerSlider.state.currentSlide);
-    // var slideState = sliderRef.current.innerSlider.state;
-    // var prevClass = (slideState.currentSlide > 0) ? $('.custom-prev-icon').removeClass('disabled') : $('.custom-prev-icon').addClass('disabled');
-    // var nextClass = (slideState.currentSlide < slideState.slideCount - 1) ? '' : 'disabled';
-    // $('custom-prev-icon')
     const timer = setInterval(() => {
       setTime(moment.tz(moment(), tz).format('h:mm A'));
       setDay(moment.tz(moment(), tz).format('YYYY-MM-DD'));
@@ -71,26 +39,25 @@ export default function WeatherCards ({weatherData, zipCode}) {
   let dailyData = {};
   let last_day = '';
   let first_iter = true;
-
-  const prev = () => {
-    sliderRef.current.slickPrev();
-    (sliderRef.current.innerSlider.state.currentSlide > 0)
-      ? $('.custom-prev-icon').removeClass('disabled')
-      : $('.custom-prev-icon').addClass('disabled');
-    (sliderRef.current.innerSlider.state.currentSlide < sliderRef.current.innerSlider.state.slideCount - 1)
-      ? $('.custom-next-icon').addClass('disabled')
-      : $('.custom-next-icon').removeClass('disabled');
+  var fired = true;
+  const slide = (y) => {
+      (y > 0)
+        ? sliderRef.current.slickNext()
+        : sliderRef.current.slickPrev();
   }
+  var swipe = true;
+  var swipeThresh = 0.5;
+  var swipeDiv = 50;
 
-  const next = () => {
-    sliderRef.current.slickNext();
-    (sliderRef.current.innerSlider.state.currentSlide > 0)
-      ? $('.custom-prev-icon').removeClass('disabled')
-      : $('.custom-prev-icon').addClass('disabled');
-    (sliderRef.current.innerSlider.state.currentSlide < sliderRef.current.innerSlider.state.slideCount - 1)
-      ? $('.custom-next-icon').addClass('disabled')
-      : $('.custom-next-icon').removeClass('disabled');
-  }
+  window.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    if ((e.deltaX / swipeDiv >= swipeThresh || e.deltaX / swipeDiv <= -swipeThresh) && swipe) {
+      swipe = false;
+      slide(e.deltaX);
+    } else {
+      swipe = true;
+    }
+  })
 
   for (const x in weatherData['list']) {
     var inc = weatherData['list'][x];
@@ -146,6 +113,11 @@ export default function WeatherCards ({weatherData, zipCode}) {
     arrows: true,
     draggable: true,
     rows: 1,
+    swipe: true,
+    beforeChange: () => {
+      setSlides(sliderRef.current.innerSlider.state.currentSlide);
+      console.log(slides);
+    },
     responsive: [
       {
         breakpoint: 1025,
