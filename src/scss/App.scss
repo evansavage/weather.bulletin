@@ -189,7 +189,7 @@ html, body {
 
 .current-icon {
   width: 60px;
-  height: 60px;
+  // height: 70px;
 }
 
 .header-line {
@@ -344,8 +344,14 @@ html, body {
     }
     .max-temp, .min-temp {
       font-weight: 500;
-      min-width: 50px;
+      width: 44px;
       text-align: right;
+    }
+    .daily-icon {
+      display: flex;
+      justify-content: center;
+      width: 55px;
+      margin-left: 10px;
     }
   }
 }
@@ -382,7 +388,7 @@ html, body {
   position: relative;
   .precip-percent {
     position: absolute;
-    left: 90%;
+    left: 72%;
     top: 50%;
     transform: translateY(-50%);
     font-size: 0.75rem;
@@ -410,7 +416,7 @@ html, body {
   margin-right: 10px;
   margin-bottom: 5px;
   max-width: 65%;
-  margin-left: 60px;
+  margin-left: 10px;
   img {
     width: 40px;
     height: 40px;
@@ -520,13 +526,6 @@ html, body {
 
     }
   }
-}
-
-.daily-icon {
-  display: flex;
-  justify-content: center;
-  width: 60px;
-  margin-right: 8px;
 }
 
 @media (max-width: 700px) {
