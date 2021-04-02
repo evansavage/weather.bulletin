@@ -102,7 +102,7 @@ export default function WeatherCards ({weatherData, zipCode}) {
   console.log(dailyData);
 
   var settings = {
-    dots: false,
+    // dots: true,
     variableWidth: true,
     infinite: false,
     slidesToShow: 4,
@@ -117,24 +117,33 @@ export default function WeatherCards ({weatherData, zipCode}) {
     },
     responsive: [
       {
-        breakpoint: 1025,
+        breakpoint: 40000,
+        settings: {
+          slidesToShow: 5,
+        }
+      },
+      {
+        breakpoint: 1640,
+        settings: {
+          slidesToShow: 4,
+        }
+      },
+      {
+        breakpoint: 1300,
         settings: {
           slidesToShow: 3,
-          variableWidth: true
         }
       },
       {
-        breakpoint: 769,
+        breakpoint: 966,
         settings: {
           slidesToShow: 2,
-          variableWidth: true
         }
       },
       {
-        breakpoint: 569,
+        breakpoint: 657,
         settings: {
           slidesToShow: 1,
-          variableWidth: true
         }
       }
     ]
