@@ -21,6 +21,7 @@ html, body {
 
 .outer-wrapper {
   overflow: hidden;
+  min-height: 690px;
 }
 
 
@@ -377,7 +378,7 @@ html, body {
     font-size: 1.2rem;
     margin-left: 10px;
     position: absolute;
-    right: -50px;
+    left: calc(100%);
   }
 }
 
@@ -479,6 +480,7 @@ html, body {
     .precip-percent {
       position: relative;
       right: auto;
+      left: auto;
     }
   }
   .custom-weather-slider {
