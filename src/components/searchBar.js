@@ -23,7 +23,7 @@ export default function SearchBar () {
   const params = new URLSearchParams(history.location.search);
 
   // State management hooks for the user input zip codes and temperature units
-  const [zip, setZip] = useState(params.get('zip'));
+  const [zip, setZip] = useState(params.get('zip') || '');
   const [units, setUnits] = useState((params.get('units') !== null && params.get('units') !== '') ? params.get('units') : 'imperial');
 
 
