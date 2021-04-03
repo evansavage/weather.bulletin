@@ -9,14 +9,20 @@ import CloseIcon from '@material-ui/icons/Close';
 import { useHistory } from "react-router-dom";
 import $ from 'jquery';
 
+// Functional component for querying the API, maintaining state of user inputs
+
 export default function SearchBar () {
 
-  const api_key = 'b8c57c1c1fe78770517a0b492af57a54';
+  const api_key = 'b8c57c1c1fe78770517a0b492af57a54';                 // woopsies!
   const api_url = 'https://api.openweathermap.org/data/2.5/forecast';
 
+  // allows for pushing params to browser history
   const history = useHistory();
+
+  // params variable to update/push to history
   const params = new URLSearchParams(history.location.search);
 
+  // State management hooks for the user input zip codes and temperature units
   const [zip, setZip] = useState(params.get('zip'));
   const [units, setUnits] = useState((params.get('units') !== null && params.get('units') !== '') ? params.get('units') : 'imperial');
 
@@ -28,19 +34,19 @@ export default function SearchBar () {
     }
   },[])
 
-  // Display/hide clear button if there is a zip code
+  // Display/hide clear button if there is any text entered
   useEffect(() => {
-    if (zip) {
-      $('.zip-clear').css({'display': 'flex'});
-    } else {
-      $('.zip-clear').css({'display': 'none'});
-    }
+    (zip)
+    ? $('.zip-clear').css({'display': 'flex'})
+    : $('.zip-clear').css({'display': 'none'})
   },[zip])
 
+  // Update zip code on entry
   const changeZip = e => {
     setZip(e.target.value);
   }
 
+  // Clear zip and update params in URL
   const clearZip = e => {
     e.preventDefault();
     setZip('');
@@ -49,8 +55,10 @@ export default function SearchBar () {
     $('.zip-input').focus();
   }
 
+  // Fetch the API data, returning errors if the zip is either empty
+  // or does not return a 2xx code
+  // - Render the data with the functional component WeatherCards if 2xx response
   function fetchData(units) {
-    console.log(zip);
     fetch(`${api_url}?zip=${zip},us&temp_min&units=${units}&APPID=${api_key}`)
       .then(response => {
         if (response.ok) {
@@ -79,8 +87,7 @@ export default function SearchBar () {
       });
   }
 
-
-
+  // Refresh the API search if the temperature units change, prevent the default degrees case
   const changeUnits = (e, newUnits) => {
     if (newUnits !== null) {
       params.set('units', newUnits);
@@ -89,6 +96,7 @@ export default function SearchBar () {
     }
   }
 
+  // On enter/'Check Weather', searcb for the current entered zip code
   const submitZip = e => {
     e.preventDefault();
     params.set("zip", zip);
