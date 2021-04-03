@@ -128,9 +128,10 @@ export default function WeatherCards ({weatherData, zipCode}) {
     } else {
       swipe = true;
     }
-  })
+  });
 
   // Slick Slider settings for updating how many slides to show/scroll and other metadata
+
   var settings = {
     dots: true,
     variableWidth: true,
@@ -161,9 +162,10 @@ export default function WeatherCards ({weatherData, zipCode}) {
         }
       },
       {
-        breakpoint: 694,
+        breakpoint: 700,
         settings: {
           slidesToShow: 1,
+          variableWidth: false
         }
       }
     ]
@@ -210,20 +212,19 @@ export default function WeatherCards ({weatherData, zipCode}) {
               {
                 dailyData[key].times.map((obj, index) => {
                 return (
-                  <>
                   <div className="time-percent-wrapper">
                   <div key={key + '-' + index} className="time-wrapper">
                     <span className="hour-time">{obj['time']}</span>
                     <span className="hour-temp">{obj['temp']}&#730;</span>
                     <img alt={obj['weather']['main']} src={image_url + obj['weather']['icon'] + '@2x.png'} />
+                    {
+                      (obj['pop'] > 0)
+                        ? <span className="precip-percent">{Math.round(obj['pop'] * 100)}%</span>
+                        : ''
+                    }
                   </div>
-                  {
-                    (obj['pop'] > 0)
-                      ? <span className="precip-percent">{Math.round(obj['pop'] * 100)}%</span>
-                      : ''
-                  }
+
                   </div>
-                  </>
                 )})
               }
             </div>
