@@ -23,18 +23,57 @@ html, body {
   overflow: hidden;
 }
 
+// Flexbox line-break utility
+
+.line-break {
+  width: 100%;
+  display: none;
+}
+
+// NAV FORMATTING
+
+.nav-border-wrapper {
+  border-bottom: 1px solid black;
+}
+
+.nav-wrapper {
+  font-family: nhaas;
+  padding: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1440px;
+  margin: 0 auto;
+  h1 {
+    margin: 0;
+    font-size: 1.7rem;
+    font-weight: normal;
+    .title-small {
+      display: none;
+    }
+  }
+  &:first-child {
+    margin-right: auto;
+  }
+  &:last-child {
+    > * {
+      margin-left: auto;
+    }
+  }
+  > * {
+    flex: 1;
+  }
+}
+
+// ZIP CODE INPUT
 
 .zip-form {
-  // left: 50%;
-  // transform: translateX(-50%);
-  // text-align: center;
   display: flex;
   justify-content: center;
 }
 
 .zip-label {
   position: relative;
-  // margin-right: 20px;
   top: 0px;
   display: inline-flex;
   align-items: center;
@@ -48,15 +87,12 @@ html, body {
   cursor: pointer;
   height: 24px;
   width: 24px;
-  // align-items: center;
   justify-content: center;
   align-items: center;
-  // top: 0px;
   top: 3px;
   background-color: transparent;
   border: none;
   outline: none;
-  // transform: translateY(-50%);
   svg {
     fill: $light-font-color;
     width: 18px;
@@ -99,40 +135,7 @@ html, body {
   }
 }
 
-.nav-border-wrapper {
-  border-bottom: 1px solid black;
-}
-
-.nav-wrapper {
-  font-family: nhaas;
-  padding: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1440px;
-  margin: 0 auto;
-  h1 {
-    margin: 0;
-    font-size: 1.7rem;
-    // letter-spacing: 0.2px;
-    font-weight: normal;
-    // flex: 1;
-    .title-small {
-      display: none;
-    }
-  }
-  &:first-child {
-    margin-right: auto;
-  }
-  &:last-child {
-    > * {
-      margin-left: auto;
-    }
-  }
-  > * {
-    flex: 1;
-  }
-}
+// UNIT BUTTONS IN NAV
 
 .unit-buttons {
   .MuiToggleButton-root {
@@ -147,6 +150,8 @@ html, body {
     }
   }
 }
+
+// WEATHER HEADER (displays city/current weather)
 
 .weather-header-wrapper {
   max-width: 600px;
@@ -189,7 +194,6 @@ html, body {
 
 .current-icon {
   width: 60px;
-  // height: 70px;
 }
 
 .header-line {
@@ -199,15 +203,13 @@ html, body {
   height: 0px;
 }
 
+// CONTAINER FOR THE SUBSEQUENT DAYS' WEATHER
+
 #weather-day-container {
   padding-left: $large-weather-padding;
   padding-right: $large-weather-padding;
   max-width: 1440px;
   margin: 0 auto;
-  // overflow: hidden;
-}
-
-#weather-day-container {
   .slick-dots {
     position: fixed;
     bottom: 40px;
@@ -216,25 +218,18 @@ html, body {
   }
 }
 
-.line-break {
-  width: 100%;
-  display: none;
-}
-
 .day-container {
-  // display: flex;
   max-width: 1440px;
   margin: 0 auto;
-  // font-family: sans-serif;
 }
+
+// SLIDER STYLING/OVERRIDES FROM SLICK
 
 .custom-weather-slider {
   max-width: 1440px;
   margin-left: auto;
   margin-right: auto;
   cursor: grab;
-  // left: -1 * $large-weather-padding / 2;
-  // width: calc(100% + #{$large-weather-padding});
   .slick-list {
     overflow: visible;
   }
@@ -248,7 +243,6 @@ html, body {
     height: 40px;
     padding: 6px;
     z-index: 2;
-    // opacity: 0.6;
     &.slick-disabled:before, &.slick-disabled:hover:before, &.slick-disabled:focus:before {
       opacity: 0.3;
     }
@@ -257,7 +251,6 @@ html, body {
       opacity: 0.75;
     }
     &:before {
-      // opacity: 0.5;
       font-size: 23px;
       color: rgba(0, 0, 0, 0.54);
     }
@@ -278,6 +271,8 @@ html, body {
     }
   }
 }
+
+// FADE OVVERLAYS ON LEFT/RIGHT
 
 .custom-weather-slider:after {
   content: "";
@@ -306,47 +301,40 @@ html, body {
 }
 
 .slick-slide {
-  // width: 240px;
-  // margin-right: 55px;
   padding: 15px 60px 15px 0;
   min-width: 280px;
 }
 
-
+// CONTAINER FOR EACH DAY IN SLIDER
 
 .day-wrapper {
-  // border: 1px solid grey;
-  // width: 240px;
-  // padding: 15px 45px;
   outline: none;
-  width: 230px;
-  // flex: 1;
-  // background-color: $weather-card-background-color;
-  // border-radius: 10px;
   .date-wrapper {
     font-size: 1.2rem;
     display: flex;
     justify-content: space-between;
-    // margin-bottom: 10px;
     align-items: center;
 
     .day-title {
-      // font-family: nhaas;
       text-align: left;
       flex: 1;
       font-weight: 300;
     }
+
     .max-temp {
       color: black;
     }
+
     .min-temp {
       color: grey;
     }
+
     .max-temp, .min-temp {
       font-weight: 500;
       width: 44px;
       text-align: right;
     }
+
     .daily-icon {
       display: flex;
       justify-content: center;
@@ -356,23 +344,29 @@ html, body {
   }
 }
 
+// TOP BANNER IN EACH DAY
+
 .current-day-weather {
   display: flex;
+
   .current-time-wrapper {
     display: flex;
     align-items: center;
     font-size: 1.1rem;
     color: $light-font-color;
+
     .hour-temp {
       text-align: right;
       width: 30px;
       font-weight: 400;
     }
+
     .hour-time {
       width: 75px;
       font-weight: 300;
       text-align: right;
     }
+
     img {
       width: 50px;
       height: 50px;
@@ -405,14 +399,14 @@ html, body {
   }
 }
 
+// WRAPPER FOR EACH INCREMENT
+
 .time-wrapper {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  // width: ;
   font-size: 0.9rem;
   color: $light-font-color;
-  // margin-left: 20px;
   margin-right: 10px;
   margin-bottom: 5px;
   max-width: 65%;
@@ -439,11 +433,6 @@ html, body {
     padding-left: $medium-weather-padding;
     padding-right: $medium-weather-padding;
   }
-  // .slick-slide {
-  //   // width: 240px;
-  //   // margin-right: 55px;
-  //   padding: 15px 70px 15px 0;
-  // }
 
   .custom-weather-slider {
     .slick-prev {
@@ -456,17 +445,11 @@ html, body {
 
   .custom-weather-slider:before {
     width: $medium-weather-padding / 2 - 10px;
-    // left: -1 * $medium-weather-padding  - $medium-weather-padding / 2;
-    // border-left: $medium-weather-padding solid $html-background-color;
   }
 
   .custom-weather-slider:after {
     width: $medium-weather-padding / 2 - 10px;
-    // right: -1 * $medium-weather-padding  - $medium-weather-padding / 2;
-    // border-right: $medium-weather-padding solid $html-background-color;
   }
-
-
 
   .zip-form {
     flex: 2;
@@ -487,10 +470,10 @@ html, body {
     h1 {
       flex: 1;
     }
-
   }
   .unit-buttons {
     flex: 0;
+
     .MuiToggleButton-root {
       .MuiToggleButton-label {
       }
@@ -499,31 +482,17 @@ html, body {
       }
     }
   }
+
   .weather-header-wrapper {
     flex-wrap: wrap;
-    // margin: 60px 0 20px;
     .weather-header {
       margin: 0;
-      // width: 100%;
       font-size: 1.8rem;
-    }
-    .current-time {
-      // text-align: left;
-      // margin-right: 5px;
     }
     .precip-percent {
       position: relative;
       right: auto;
       left: auto;
-    }
-  }
-  .custom-weather-slider {
-    .slick-prev {
-      // left: calc(100% - 40px);
-    }
-    .slick-next {
-      // left: calc(100%);
-
     }
   }
 }
@@ -576,15 +545,11 @@ html, body {
   .custom-weather-slider:before {
     width: 60px;
     right: 95%;
-    // left: -1 * $small-weather-padding  - $small-weather-padding / 2;
-    // border-left: $small-weather-padding solid $html-background-color;
   }
 
   .custom-weather-slider:after {
     width: 60px;
     left: 90%;
-    // right: -1 * $small-weather-padding  - $small-weather-padding / 2;
-    // border-right: $small-weather-padding solid $html-background-color;
   }
 
   .weather-header-wrapper {
@@ -594,9 +559,7 @@ html, body {
     }
     .current-time {
       font-size: 1.4rem;
-      // text-align: left;
       margin-right: 0px;
-      // display: none;
     }
     .current-weather {
       font-size: 1.4rem;
