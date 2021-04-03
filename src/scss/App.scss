@@ -19,8 +19,17 @@ html, body {
    overscroll-behavior-x: none;
 }
 
+body {
+  height: 100%;
+}
+
+#root {
+  height: 100%;
+}
+
 .outer-wrapper {
-  overflow: hidden;
+  overflow-x: hidden;
+  min-height: 720px;
 }
 
 // Flexbox line-break utility
@@ -34,6 +43,10 @@ html, body {
 
 .nav-border-wrapper {
   border-bottom: 1px solid black;
+  position: fixed;
+  width: 100%;
+  background-color: $html-background-color;
+  z-index: 10000;
 }
 
 .nav-wrapper {
@@ -155,7 +168,7 @@ html, body {
 
 .weather-header-wrapper {
   max-width: 600px;
-  margin: 60px 0 20px;
+  margin: 0 0 20px;
   display: flex;
   align-items: center;
 }
@@ -210,9 +223,10 @@ html, body {
   padding-right: $large-weather-padding;
   max-width: 1440px;
   margin: 0 auto;
+  margin-top: 124px;
   .slick-dots {
-    position: fixed;
-    bottom: 40px;
+    position: absolute;
+    bottom: -40px;
     left: 50%;
     transform: translateX(-50%);
   }
@@ -540,6 +554,7 @@ html, body {
   #weather-day-container {
     padding-left: $small-weather-padding;
     padding-right: $small-weather-padding;
+    margin-top: 106px;
   }
 
   .custom-weather-slider:before {
@@ -553,7 +568,7 @@ html, body {
   }
 
   .weather-header-wrapper {
-    margin: 30px auto 15px;
+    margin: 0 auto;
     .weather-header {
       font-size: 1.7rem;
     }
