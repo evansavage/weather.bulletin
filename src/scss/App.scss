@@ -573,6 +573,20 @@ body {
     width: 120px;
   }
 
+  .zip-form {
+    flex: 1;
+    justify-content: center;
+    .zip-input-wrapper {
+      margin-right: 0;
+      justify-content: inherit;
+    }
+  }
+
+  .unit-buttons {
+    flex: 1;
+  }
+
+
   .slick-slide {
     // min-width: 270px;
     // padding: 15px 50px 15px 0;
@@ -597,9 +611,6 @@ body {
         display: none;
       }
     }
-  }
-  .zip-form {
-    justify-content: flex-start;
   }
   #weather-day-container {
     padding-left: $small-weather-padding;
