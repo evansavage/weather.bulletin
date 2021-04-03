@@ -121,7 +121,6 @@ export default function WeatherCards ({weatherData, zipCode}) {
   // - When the swipe values gradually reduce to zero, they do not trigger
   //   another swipe while below the threshold
   window.addEventListener('wheel', (e) => {
-    e.preventDefault();
     if ((e.deltaX / swipeDiv >= swipeThresh || e.deltaX / swipeDiv <= -swipeThresh)
       && swipe) {
       swipe = false;
