@@ -26,7 +26,7 @@ export default function WeatherCards ({weatherData, zipCode}) {
   //   zip code. Updates the current time when data is changed and every minute after
   useEffect (() => {
     setTime(moment.tz(moment(), tz).format('h:mm A'));
-    sliderRef.current.slickGoTo(0);
+    setTimeout(() => sliderRef.current.slickGoTo(0), 10); // bug if set immediately at init
     const timer = setInterval(() => {
       setTime(moment.tz(moment(), tz).format('h:mm A'));
     }, 60 * 1000);
