@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/weather.bulletin/static/css/main.07185cc0.chunk.css",
+    "main.css": "/weather.bulletin/static/css/main.666d694a.chunk.css",
     "main.js": "/weather.bulletin/static/js/main.1a7c37e3.chunk.js",
     "main.js.map": "/weather.bulletin/static/js/main.1a7c37e3.chunk.js.map",
     "runtime-main.js": "/weather.bulletin/static/js/runtime-main.c85fe599.js",
@@ -12,7 +12,7 @@
     "static/js/3.d22cf550.chunk.js.map": "/weather.bulletin/static/js/3.d22cf550.chunk.js.map",
     "index.html": "/weather.bulletin/index.html",
     "static/css/2.e66c965f.chunk.css.map": "/weather.bulletin/static/css/2.e66c965f.chunk.css.map",
-    "static/css/main.07185cc0.chunk.css.map": "/weather.bulletin/static/css/main.07185cc0.chunk.css.map",
+    "static/css/main.666d694a.chunk.css.map": "/weather.bulletin/static/css/main.666d694a.chunk.css.map",
     "static/js/2.b7c8ddfa.chunk.js.LICENSE.txt": "/weather.bulletin/static/js/2.b7c8ddfa.chunk.js.LICENSE.txt",
     "static/media/Fonts.scss": "/weather.bulletin/static/media/NHaasGroteskDSPro.1d3f2342.ttf",
     "static/media/App.scss": "/weather.bulletin/static/media/arrow-right.3d40ff46.svg",
@@ -22,7 +22,7 @@
     "static/js/runtime-main.c85fe599.js",
     "static/css/2.e66c965f.chunk.css",
     "static/js/2.b7c8ddfa.chunk.js",
-    "static/css/main.07185cc0.chunk.css",
+    "static/css/main.666d694a.chunk.css",
     "static/js/main.1a7c37e3.chunk.js"
   ]
 }
