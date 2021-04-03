@@ -4,6 +4,8 @@ import './scss/App.scss';
 
 import SearchBar from './components/searchBar.js'
 
+// Using a router to update the URL params with zip/unit choices
+
 function App() {
   return (
     <Router>
