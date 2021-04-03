@@ -7,12 +7,14 @@ import Slider from 'react-slick';
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
+// Functional component for placing the dynamic weather information on the page
+
 export default function WeatherCards ({weatherData, zipCode}) {
 
-  var image_url = 'https://openweathermap.org/img/wn/' // URL for serving weather logos
-  var city_name = weatherData['city']['name']; // City name from API
-  var state_code = getStateName(zipCode)['code']; //Inferred state name from heuristic check
-  var tz = zipcode_to_timezone.lookup(zipCode); // Timezone used for getting local time from zip code
+  var image_url = 'https://openweathermap.org/img/wn/'  // URL for serving weather logos
+  var city_name = weatherData['city']['name'];          // City name from API
+  var state_code = getStateName(zipCode)['code'];       //Inferred state name from heuristic check
+  var tz = zipcode_to_timezone.lookup(zipCode);         // Timezone used for getting local time from zip code
 
   // state for keeping the current 12-hr time updated on the app
   const [current_time, setTime] = useState(moment.tz(moment(), tz).format('h:mm A'));
@@ -33,9 +35,9 @@ export default function WeatherCards ({weatherData, zipCode}) {
     }
   }, [tz])
 
-  let dailyData = {}; // Dynamic object for storing daily data
-  let last_day = ''; // Comparison variable to see if day has updated
-  let first_iter = true; // Catch first iteration case of the for loop
+  let dailyData = {};     // Dynamic object for storing daily data
+  let last_day = '';      // Comparison variable to see if day has updated
+  let first_iter = true;  // Catch first iteration case of the for loop
 
   // Loop through every 3-hour increment from the API data
   for (const x in weatherData['list']) {
@@ -129,7 +131,7 @@ export default function WeatherCards ({weatherData, zipCode}) {
     }
   })
 
-  // Slick Slider settings
+  // Slick Slider settings for updating how many slides to show/scroll and other metadata
   var settings = {
     dots: true,
     variableWidth: true,
@@ -140,7 +142,6 @@ export default function WeatherCards ({weatherData, zipCode}) {
     draggable: true,
     rows: 1,
     swipe: true,
-    // how many slides to show below each breakpoint value
     responsive: [
       {
         breakpoint: 40000,
