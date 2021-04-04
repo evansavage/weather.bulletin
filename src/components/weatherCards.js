@@ -47,7 +47,7 @@ export default function WeatherCards ({weatherData, zipCode}) {
     var local_datetime = moment.tz(inc['dt_txt'] + '+0000', tz);
     var day = local_datetime.format('YYYY-MM-DD');
     var day_string = local_datetime.format('ddd, MMM Do');
-    var time = local_datetime.format('h:mm A');
+    var time = local_datetime.format('h A');
 
     // Max and min temps for the current iteration
     var inc_temp_min = Math.round(inc['main']['temp_min']);
