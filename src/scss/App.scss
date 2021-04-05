@@ -328,6 +328,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 5px;
 
     .day-title {
       text-align: left;
@@ -396,7 +397,7 @@ body {
   position: relative;
   .precip-percent {
     position: absolute;
-    left: 72%;
+    left: 84%;
     top: 50%;
     transform: translateY(-50%);
     font-size: 0.75rem;
@@ -418,12 +419,12 @@ body {
 .time-wrapper {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  // justify-content: space-between;
   font-size: 0.9rem;
   color: $light-font-color;
   margin-right: 10px;
   margin-bottom: 5px;
-  max-width: 65%;
+  // max-width: 65%;
   margin-left: 10px;
   img {
     width: 40px;
@@ -434,11 +435,13 @@ body {
     text-align: right;
     width: 30px;
     font-weight: 400;
+    margin-right: 20px
   }
   .hour-time {
-    width: 75px;
+    width: 100px;
     font-weight: 300;
     text-align: right;
+    margin-right: 30px;
   }
 }
 
@@ -523,6 +526,9 @@ body {
     .date-wrapper {
       width: 90%;
       margin: 0 auto;
+      max-width: 300px;
+      left: 10px;
+      position: relative;
     }
   }
   .weather-header-wrapper {
@@ -530,23 +536,36 @@ body {
     align-items: center;
     // justify-content: center;
     .weather-header {
-      flex-grow: 0;
+      // flex-grow: 0;
     }
   }
 
   .time-percent-wrapper {
     display: flex;
-    // justify-content: center;
+    justify-content: center;
     .time-wrapper {
-      min-width: 200px;
-      max-width: 230px;
+      // min-width: 200px;
+      // max-width: 230px;
       position: relative;
-      width: 55%;
-      left: 20px;
+      // width: 55%;
+      // left: 20px;
+      width: 100%;
+      justify-content: center;
+      max-width: 320px;
+      .hour-time {
+        width: 40px;
+        margin-right: 0;
+      }
+      .hour-temp {
+        width: 80px;
+      }
+      img {
+        margin-left: 0px;
+      }
       .precip-percent {
         top: auto;
         left: auto;
-        right: -40px;
+        right: 35px;
         transform: none;
       }
     }
@@ -561,10 +580,14 @@ body {
   .current-time {
     text-align: left;
     margin-right: 5px;
+    margin-left: 15px;
   }
   .weather-header-wrapper {
     margin: 0 auto;
     justify-content: center;
+    .weather-header {
+      flex-grow: 0;
+    }
   }
 }
 
@@ -596,8 +619,8 @@ body {
     justify-content: center;
     .time-wrapper {
       position: relative;
-      width: 55%;
-      left: -8px;
+      // width: 55%;
+      // left: -8px;
     }
   }
 
