@@ -8,11 +8,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 In the project directory, you can run:
 
-###`npm install`
+`npm install`
 
 to install the needed dependencies. Then, run:
 
-### `npm start`
+`npm start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000/weather.bulletin](http://localhost:3000/weather.bulletin) to view it in the browser.
